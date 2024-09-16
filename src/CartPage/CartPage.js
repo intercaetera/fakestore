@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import {useMemo} from 'react';
 import {
-	Box, Heading, Table, Thead, Tbody, Th, Tr, Image,
+	Box, Heading, Table, TableContainer, Thead, Tbody, Th, Tr, Image,
 } from '@chakra-ui/react';
 import {Cell} from './Cell';
 import {Layout} from '../shared/Layout';
@@ -12,8 +12,8 @@ export const CartPage = ({cart}) => {
 
 	return (
 		<Layout>
-			<Box margin='auto'>
-				<Table gap={4}>
+			<Box overflowX='auto' overflowY='hidden' maxW='100%'>
+				<Table gap={[2, 4]}>
 					<Thead fontSize='0.7rem' color='blackAlpha.600' textTransform='uppercase'>
 						<Tr>
 							<Th>#</Th>
@@ -26,24 +26,23 @@ export const CartPage = ({cart}) => {
 					</Thead>
 					<Tbody>
 						{cart.products.map((product, index) => (
-							<Tr key={product.productId}>
+							<Tr key={product.id}>
 								<Cell isNumerical>{index}</Cell>
 								<Cell>
 									<Image h={8} w={8} src={product.image} objectFit='contain' />
 								</Cell>
 								<Cell>
-									<Heading maxW='md'>
+									<Heading maxW='md' minW='sm'>
 										{product.title}
 									</Heading>
 								</Cell>
 								<Cell isNumerical>${product.price.toFixed(2)}</Cell>
 								<Cell isNumerical>{product.quantity}</Cell>
-								<Cell isNumerical data-testid="subtotal">${(product.price * product.quantity).toFixed(2)}</Cell>
+								<Cell isNumerical data-testid='subtotal'>${(product.price * product.quantity).toFixed(2)}</Cell>
 							</Tr>
 						))}
 					</Tbody>
 				</Table>
-
 				<Heading fontSize='1.5rem' textAlign='right' pr={4}>Total: ${total.toFixed(2)}</Heading>
 			</Box>
 		</Layout>

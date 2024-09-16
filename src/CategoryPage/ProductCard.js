@@ -14,7 +14,7 @@ export const PureProductCard = ({addToCart, product}) => {
 
 	const mutation = useMutation({
 		mutationFn() {
-			const request = addToCart(product.id)
+			const request = addToCart(product.id);
 
 			toast.promise(request, {
 				success: {title: 'Added to cart', description: product.title},
@@ -65,20 +65,20 @@ export const PureProductCard = ({addToCart, product}) => {
 
 export const ProductCard = props => {
 	const addToCart = productId => fetch(getCart(), {
-				method: 'PUT',
-				body: JSON.stringify({
-					userId: 3,
-					date: '2019-12-10',
-					products: [{productId, quantity: 1}],
-				}),
-			});
+		method: 'PUT',
+		body: JSON.stringify({
+			userId: 3,
+			date: '2019-12-10',
+			products: [{productId, quantity: 1}],
+		}),
+	});
 
 	return (
 		<PureProductCard addToCart={addToCart} {...props} />
-	)
-}
+	);
+};
 
-ProductCard.propTypes = {
+PureProductCard.propTypes = {
 	product: productPropType,
 	addToCart: PropTypes.func.isRequired,
 };
