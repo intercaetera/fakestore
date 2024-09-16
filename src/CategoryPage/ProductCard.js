@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
 	Heading, Image, VStack, useToast,
 } from '@chakra-ui/react';
@@ -8,19 +9,12 @@ import {IconShoppingBagPlus} from '@tabler/icons-react';
 import {useMutation} from '@tanstack/react-query';
 import {getCart} from '../shared/routes';
 
-export const ProductCard = ({product}) => {
+export const PureProductCard = ({addToCart, product}) => {
 	const toast = useToast();
 
 	const mutation = useMutation({
 		mutationFn() {
-			const request = fetch(getCart(), {
-				method: 'PUT',
-				body: JSON.stringify({
-					userId: 3,
-					date: '2019-12-10',
-					products: [{productId: product.id, quantity: 1}],
-				}),
-			});
+			const request = addToCart(product.id)
 
 			toast.promise(request, {
 				success: {title: 'Added to cart', description: product.title},
@@ -69,6 +63,22 @@ export const ProductCard = ({product}) => {
 	);
 };
 
+export const ProductCard = props => {
+	const addToCart = productId => fetch(getCart(), {
+				method: 'PUT',
+				body: JSON.stringify({
+					userId: 3,
+					date: '2019-12-10',
+					products: [{productId, quantity: 1}],
+				}),
+			});
+
+	return (
+		<PureProductCard addToCart={addToCart} {...props} />
+	)
+}
+
 ProductCard.propTypes = {
 	product: productPropType,
+	addToCart: PropTypes.func.isRequired,
 };

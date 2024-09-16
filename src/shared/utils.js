@@ -4,7 +4,7 @@ export const mergeCartWithProducts = (cart, products) => {
 	return ({
 		...cart,
 		products: cart.products.map(({productId, quantity}) => ({
-			productId,
+			id: productId,
 			...productsMap.get(productId),
 			quantity,
 		})),

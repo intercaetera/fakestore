@@ -38,7 +38,7 @@ export const CartPage = ({cart}) => {
 								</Cell>
 								<Cell isNumerical>${product.price.toFixed(2)}</Cell>
 								<Cell isNumerical>{product.quantity}</Cell>
-								<Cell isNumerical>${(product.price * product.quantity).toFixed(2)}</Cell>
+								<Cell isNumerical data-testid="subtotal">${(product.price * product.quantity).toFixed(2)}</Cell>
 							</Tr>
 						))}
 					</Tbody>
