@@ -41,9 +41,13 @@ export const CartPage = ({cart}) => {
 								<Cell isNumerical data-testid='subtotal'>${(product.price * product.quantity).toFixed(2)}</Cell>
 							</Tr>
 						))}
+						<Tr>
+							<Cell colSpan={6}>
+								<Heading fontSize='1.5rem' textAlign='right'>Total: ${total.toFixed(2)}</Heading>
+							</Cell>
+						</Tr>
 					</Tbody>
 				</Table>
-				<Heading fontSize='1.5rem' textAlign='right' pr={4}>Total: ${total.toFixed(2)}</Heading>
 			</Box>
 		</Layout>
 	);
